@@ -1,1 +1,5 @@
-export const foo = 'foo'
+import { getProducts } from './shopify';
+
+(async () => {
+  const products = await getProducts();
+})();
