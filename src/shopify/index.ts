@@ -1,8 +1,44 @@
+import { json2csv } from 'json-2-csv';
 import { shopifyGraphqlClient } from './connectShopify';
 import { sleep } from './helper';
-import { json2csv } from 'json-2-csv';
 
 const gql = String.raw;
+
+export async function getOrderIdByOrderNumber(on: string) {
+  const query = gql`
+    query ($searchQuery: String) {
+      orders(first: 1, query: $searchQuery) {
+        nodes {
+          id
+        }
+      }
+    }
+  `;
+  const variables = {
+    searchQuery: `name:${on}`,
+  };
+  try {
+    const res = await shopifyGraphqlClient.query<{
+      data: {
+        orders: {
+          nodes: {
+            id: String;
+          }[];
+        };
+      };
+    }>({
+      data: {
+        query,
+        variables,
+      },
+    });
+    if (res?.body?.data?.orders?.nodes?.[0]?.id)
+      return res.body.data.orders.nodes[0].id;
+  } catch (error) {
+    console.error('could not get order from shopify');
+    console.error(error);
+  }
+}
 
 export async function getProducts() {
   const variantsFromShop = await getAllVariantProducts();

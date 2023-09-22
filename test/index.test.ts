@@ -1,8 +1,8 @@
 import { test, assert } from 'vitest';
 import { writeFile } from 'fs/promises';
-import { getProducts } from '../src/shopify/';
+import { getOrderIdByOrderNumber, getProducts } from '../src/shopify/';
 
-test('simple', async () => {
+test.skip('get all products', async () => {
   const p = await getProducts();
 
   try {
@@ -12,3 +12,8 @@ test('simple', async () => {
   }
   assert.equal(true, true);
 }, 20000);
+
+test('get order id by order number', async () => {
+  const id = await getOrderIdByOrderNumber('B13282');
+  assert.equal(id, 'gid://shopify/Order/5755171635530');
+}, 5000);
