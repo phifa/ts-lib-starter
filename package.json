@@ -32,6 +32,7 @@
     "@js-joda/core": "^5.5.3",
     "@js-joda/timezone": "^2.18.0",
     "@shopify/shopify-api": "^7.6.0",
+    "csv-file-to-json": "^4.0.5",
     "dotenv": "^16.3.1",
     "json-2-csv": "^4.1.0",
     "lodash": "^4.17.21",

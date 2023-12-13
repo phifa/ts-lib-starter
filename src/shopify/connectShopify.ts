@@ -33,6 +33,8 @@ export const shopifyAPI = shopifyApi({
   },
 });
 
+
+
 export const shopifySession = shopifyAPI.session.customAppSession(shopName);
 
 // 2. use graphql
@@ -44,6 +46,8 @@ export const shopifyGraphqlClient = new shopifyAPI.clients.Graphql({
 // 3. alternative rest call
 export const shopifyRestClient = new shopifyAPI.clients.Rest({
   session: shopifySession,
+
+
 });
 
 export async function testGraphql() {
